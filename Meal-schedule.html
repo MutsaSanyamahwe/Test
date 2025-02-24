@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Schedule</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            /*This is batman*/
+            /*let us go home......Release the houndss*/
+            /*Done*/
+        }
+
+        .meal-schedule-container {
+            display: flex;
+            width: 80%;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /*  JT  */
+        }
+        /*Try again12we*/
+
+        .calendar {
+            width: 25%;
+            padding: 20px;
+            background: #e65300;
+            color: white;
+        }
+
+        .calendar h2 {
+            margin-top: 0;
+        }
+
+        .calendar .schedule-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #fff;
+            color: #000;
+            border: 1px solid #e65300;
+        }
+
+        .meals {
+            width: 50%;
+            padding: 20px;
+            background: #fff;
+            overflow-y: auto;
+        }
+
+        .meal-item {
+            border-bottom: 1px solid #e65300;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .meal-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .meal-item h3 {
+            margin: 0 10px 0 0;
+        }
+
+        .meal-item button {
+            background-color: #e65300;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+		.button{
+			background-color: #e65300;
+            color: white;
+			border: none;
+            margin: 10px;
+            cursor: pointer;
+			height: 29px;
+			border-radius: 5px;
+		}
+
+        .meal-image {
+            width: 100px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .meal-details {
+            margin-left: 10px;
+        }
+
+        .recommendation {
+            width: 25%;
+            padding: 20px;
+            background: #fff;
+            border-left: 1px solid #e65300;
+        }
+		/* The Modal (background) */
+		.modal {
+			display: none; 
+			position: fixed; 
+			z-index: 1; 
+			left: 0;
+			top: 0;
+			width: 100%; 
+			height: 100%; 
+			overflow: auto; 
+			background-color: rgb(0,0,0); 
+			background-color: rgba(0,0,0,0.4); 
+		}
+
+		/* Modal Content */
+		.modal-content {
+			background-color: #fefefe;
+			margin: 15% auto; 
+			padding: 20px;
+			border: 1px solid #888;
+			width: 80%; 
+		}
+
+		/* The Close Button */
+		.close {
+			color: #aaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		.close:hover,
+		.close:focus {
+			color: black;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+
+    </style>
+</head>
+<body>
+    <div class="meal-schedule-container">
+        <div class="calendar">
+            <h2>Today's Schedule</h2>
+            <div class="schedule-item">
+                <strong>9:00 AM - 10:00 AM:</strong> Computer Science - D-LES 101 - Class 
+            </div>
+            <div class="schedule-item">
+                <strong>12:00 PM - 1:00 PM:</strong> Informatics - C-LES 200 - Class
+            </div>
+            <div class="schedule-item">
+                <strong>3:00 PM - 4:00 PM:</strong> IT Management - C-LES 203 - Class
+            </div>
+            <!-- Add more schedule items as needed -->
+        </div>
+        <div class="meals">
+            <h2>Available Meals</h2>
+            <div class="meal-item" data-preparation-time="30" data-price="50" data-shop="Shop A">
+                <div class="meal-info">
+                    <img src="https://th.bing.com/th/id/OIP.pGxT5I5E9bEjsYbyDBTo8QHaEu?w=309&h=197&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Meal 1" class="meal-image">
+                    <div class="meal-details">
+                        <h3>Meal 1</h3>
+                        <p>Price: $50</p>
+                        <p>Shop: Shop A</p>
+                        <p>Preparation Time: 30 mins</p>
+                    </div>
+                </div>
+                <button onclick="orderMeal('Meal 1', 30, 50, 'Shop A')">Order</button>
+            </div>
+            <div class="meal-item" data-preparation-time="45" data-price="70" data-shop="Shop B">
+                <div class="meal-info">
+                    <img src="https://th.bing.com/th/id/OIP.pGxT5I5E9bEjsYbyDBTo8QHaEu?w=309&h=197&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Meal 2" class="meal-image">
+                    <div class="meal-details">
+                        <h3>Meal 2</h3>
+                        <p>Price: $70</p>
+                        <p>Shop: Shop B</p>
+                        <p>Preparation Time: 45 mins</p>
+                    </div>
+                </div>
+                <button onclick="orderMeal('Meal 2', 45, 70, 'Shop B')">Order</button>
+            </div>
+            <div class="meal-item" data-preparation-time="20" data-price="30" data-shop="Shop C">
+                <div class="meal-info">
+                    <img src="https://th.bing.com/th/id/OIP.pGxT5I5E9bEjsYbyDBTo8QHaEu?w=309&h=197&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Meal 3" class="meal-image">
+                    <div class="meal-details">
+                        <h3>Meal 3</h3>
+                        <p>Price: $30</p>
+                        <p>Shop: Shop C</p>
+                        <p>Preparation Time: 20 mins</p>
+                    </div>
+                </div>
+                <button onclick="orderMeal('Meal 3', 20, 30, 'Shop C')">Order</button>
+            </div>
+            <!-- Add more meals as needed -->
+        </div>
+        <div class="recommendation" id="recommendation">
+            <h2>Recommended Order Times</h2>
+            <p>Select a meal to see recommendations based on your schedule.</p>
+        </div>
+		
+		<!-- Warning Modal -->
+		<div id="warningModal" class="modal">
+			<div class="modal-content">
+				<span class="close" onclick="closeWarning()">&times;</span>
+				<p>Warning: You will miss your class!!</p>
+			</div>
+		</div>
+    </div>
+
+    <script>
+        function orderMeal(mealName, preparationTime, price, shopName) {
+            // Dummy user schedule
+            const userSchedule = [
+                { start: "09:00", end: "10:00" },
+                { start: "12:00", end: "13:00" },
+                { start: "15:00", end: "16:00" },
+            ];
+
+            // Calculate recommended order times
+            const recommendations = getRecommendations(preparationTime, userSchedule);
+
+            // Display recommendations
+            const recommendationDiv = document.getElementById('recommendation');
+            recommendationDiv.innerHTML = `<h2>Recommended Order Times for ${mealName}</h2>`;
+            recommendationDiv.innerHTML += `<p>Price: R${price}</p>`;
+            recommendationDiv.innerHTML += `<p>Shop: ${shopName}</p>`;
+            recommendationDiv.innerHTML += `<p>Preparation Time: ${preparationTime} mins</p>`;
+			recommendationDiv.innerHTML += `<p><strong>Recommended Times:<strong></p>`;
+            recommendations.forEach(time => {
+                recommendationDiv.innerHTML += `<p>${time}</p>`;
+            });
+			recommendationDiv.innerHTML += `<button class="button">Order Later</button>`;
+			recommendationDiv.innerHTML += `<button class="button" onclick="warning()">Order Now</button>`;
+        }
+		
+		function warning() {
+			document.getElementById('warningModal').style.display = 'block';
+		}
+
+		function closeWarning() {
+			document.getElementById('warningModal').style.display = 'none';
+		}
+
+        function getRecommendations(preparationTime, userSchedule) {
+            const recommendations = [];
+            userSchedule.forEach(slot => {
+                const startTime = new Date(`1970-01-01T${slot.start}:00`);
+                const endTime = new Date(`1970-01-01T${slot.end}:00`);
+
+                const recommendedTime = new Date(startTime.getTime() - preparationTime * 60000);
+
+                if (recommendedTime >= new Date("1970-01-01T00:00:00") && recommendedTime <= endTime) {
+                    recommendations.push(recommendedTime.toTimeString().substring(0, 5));
+                }
+            });
+
+            return recommendations;
+        }
+    </script>
+</body>
+</html>
